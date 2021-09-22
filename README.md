@@ -1,4 +1,4 @@
-Invaders
+Invaders for software develop practice team OB
 =
 [Space Invaders](http://en.wikipedia.org/wiki/Space_Invaders) clone, written in Java.
 
