@@ -18,8 +18,8 @@ If the Java path is not set correctly, you can also navigate to the directory fr
 
 >java -jar invaders.jar
 
-###System Requirements
+### System Requirements
 Requires Java 7 or better.
 
-###Resources
+### Resources
 [Space Invaders Regular (font)](http://www.fonts2u.com/space-invaders-regular.font) - &copy; kylemaoin 2010
