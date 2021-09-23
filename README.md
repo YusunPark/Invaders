@@ -1,16 +1,19 @@
+<<<<<<< HEAD
+Invaders modify!!
+=======
 Invaders for CSE2024
+>>>>>>> 060cefcae265b5f0c2c378c4acf064f70bb9ad08
 =
 [Space Invaders](http://en.wikipedia.org/wiki/Space_Invaders) clone, written in Java.
 
-###Screenshots
+### Screenshots
 ![](http://i.minus.com/ijt8HhaA8laZq.png)
 
-###Download
-[Dropbox](https://dl.dropboxusercontent.com/u/23829102/invaders.zip)
+### Download: [Dropbox](https://dl.dropboxusercontent.com/u/23829102/invaders.zip)
 
-Mirror: [Mediafire](http://www.mediafire.com/download/kwv9s90j9i1o4kc/invaders.zip)
+### Mirror: [Mediafire](http://www.mediafire.com/download/kwv9s90j9i1o4kc/invaders.zip)
 
-###Installation
+### Installation
 After downloading the file above, unpack it and save it to an appropiate location.
 
 Open the directory and double-click invaders.jar. In some systems (i.e. Ubuntu) you may need to select 'Open with OpenJDK 7 Runtime' or similar from the context menu.
@@ -19,9 +22,13 @@ If the Java path is not set correctly, you can also navigate to the directory fr
 
 >java -jar invaders.jar
 
-###System Requirements
+### System Requirements
 Requires Java 7 or better.
 
+<<<<<<< HEAD
+### Resources
+[Space Invaders Regular (font)](http://www.fonts2u.com/space-invaders-regular.font) - &copy; kylemaoin 2010
+=======
 ###Resources
 [Space Invaders Regular (font)](http://www.fonts2u.com/space-invaders-regular.font) - &copy; kylemaoin 2010
 
@@ -29,3 +36,4 @@ Requires Java 7 or better.
 김현기, 이동근, 박유선, 김가령, 이준우, 배가연
 
 ###CSE2024
+>>>>>>> 060cefcae265b5f0c2c378c4acf064f70bb9ad08
