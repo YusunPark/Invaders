@@ -1,4 +1,5 @@
-Invaders modify!!
+Invaders for CSE2024
+
 =
 [Space Invaders](http://en.wikipedia.org/wiki/Space_Invaders) clone, written in Java.
 
@@ -28,3 +29,4 @@ Requires Java 7 or better.
 김현기, 이동근, 박유선, 김가령, 이준우, 배가연
 
 ###CSE2024
+
