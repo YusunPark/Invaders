@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Invaders modify!!
+=======
+Invaders for CSE2024
+>>>>>>> 060cefcae265b5f0c2c378c4acf064f70bb9ad08
 =
 [Space Invaders](http://en.wikipedia.org/wiki/Space_Invaders) clone, written in Java.
 
@@ -21,5 +25,15 @@ If the Java path is not set correctly, you can also navigate to the directory fr
 ### System Requirements
 Requires Java 7 or better.
 
+<<<<<<< HEAD
 ### Resources
 [Space Invaders Regular (font)](http://www.fonts2u.com/space-invaders-regular.font) - &copy; kylemaoin 2010
+=======
+###Resources
+[Space Invaders Regular (font)](http://www.fonts2u.com/space-invaders-regular.font) - &copy; kylemaoin 2010
+
+###Participants
+김현기, 이동근, 박유선, 김가령, 이준우, 배가연
+
+###CSE2024
+>>>>>>> 060cefcae265b5f0c2c378c4acf064f70bb9ad08
