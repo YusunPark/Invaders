@@ -1,4 +1,4 @@
-Invaders
+Invaders for CSE2024
 =
 [Space Invaders](http://en.wikipedia.org/wiki/Space_Invaders) clone, written in Java.
 
@@ -24,3 +24,8 @@ Requires Java 7 or better.
 
 ###Resources
 [Space Invaders Regular (font)](http://www.fonts2u.com/space-invaders-regular.font) - &copy; kylemaoin 2010
+
+###Participants
+김현기, 이동근, 박유선, 김가령, 이준우, 배가연
+
+###CSE2024
