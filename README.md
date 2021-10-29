@@ -33,7 +33,7 @@ Requires Java 7 or better.
 김현기, 이동근, 박유선, 김가령, 이준우, 배가연
 
 ### CSE2024
-
+jenkins test
 #### Structure
 
 ![image](https://user-images.githubusercontent.com/59571464/139381761-f9ddffb4-7767-437a-90aa-6517cf571acb.png)
