@@ -1,10 +1,9 @@
-<<<<<<< HEAD
+
 Invaders github
 =
 =======
 Invaders for CSE2024
 
->>>>>>> 8e7162f3d0eb6c8263ee859bc7e37698e9629e09
 [Space Invaders](http://en.wikipedia.org/wiki/Space_Invaders) clone, written in Java.
 
 ### Screenshots
