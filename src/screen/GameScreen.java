@@ -3,6 +3,7 @@ package screen;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ResourceBundle.Control;
 
 import engine.Cooldown;
 import engine.Core;
@@ -14,6 +15,8 @@ import entity.EnemyShip;
 import entity.EnemyShipFormation;
 import entity.Entity;
 import entity.Ship;
+import engine.DrawManager;
+import screen.PauseScreen;
 
 /**
  * Implements the game screen, where the action happens.
@@ -70,7 +73,9 @@ public class GameScreen extends Screen {
 	private boolean levelFinished;
 	/** Checks if a bonus life is received. */
 	private boolean bonusLife;
-
+	/** Pause Screen */
+	private Screen pausescreen;
+	private boolean isPause;
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -101,6 +106,8 @@ public class GameScreen extends Screen {
 			this.lives++;
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
+		this.pausescreen = new PauseScreen(width, height, fps);
+		this.isPause = false;
 	}
 
 	/**
@@ -143,6 +150,7 @@ public class GameScreen extends Screen {
 
 	/**
 	 * Updates the elements on screen and checks for events.
+	 * + esc 누르면 퍼즈 화면 출력하게 수정하기
 	 */
 	protected final void update() {
 		super.update();
@@ -169,6 +177,21 @@ public class GameScreen extends Screen {
 				if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
 					if (this.ship.shoot(this.bullets))
 						this.bulletsShot++;
+				
+				// keyDown이 아니라 key 입력으로 받고싶은데...
+				if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE))
+					this.isPause = true;
+					draw();
+					while(isPause) {
+						try {
+							Thread.sleep(80);
+							if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE))
+								isPause = false;
+								this.returnCode = 2;
+							Thread.sleep(80);
+						} catch (InterruptedException e) { }
+				}
+				
 			}
 
 			if (this.enemyShipSpecial != null) {
@@ -214,41 +237,52 @@ public class GameScreen extends Screen {
 	 * Draws the elements associated with the screen.
 	 */
 	private void draw() {
-		drawManager.initDrawing(this);
+		if (!isPause) {
+			drawManager.initDrawing(this);
 
-		drawManager.drawEntity(this.ship, this.ship.getPositionX(),
-				this.ship.getPositionY());
-		if (this.enemyShipSpecial != null)
-			drawManager.drawEntity(this.enemyShipSpecial,
-					this.enemyShipSpecial.getPositionX(),
-					this.enemyShipSpecial.getPositionY());
+			drawManager.drawEntity(this.ship, this.ship.getPositionX(),
+					this.ship.getPositionY());
+			if (this.enemyShipSpecial != null)
+				drawManager.drawEntity(this.enemyShipSpecial,
+						this.enemyShipSpecial.getPositionX(),
+						this.enemyShipSpecial.getPositionY());
 
-		enemyShipFormation.draw();
+			enemyShipFormation.draw();
 
-		for (Bullet bullet : this.bullets)
-			drawManager.drawEntity(bullet, bullet.getPositionX(),
-					bullet.getPositionY());
+			for (Bullet bullet : this.bullets)
+				drawManager.drawEntity(bullet, bullet.getPositionX(),
+						bullet.getPositionY());
 
-		// Interface.
-		drawManager.drawScore(this, this.score);
-		drawManager.drawLives(this, this.lives);
-		drawManager.drawHorizontalLine(this, SEPARATION_LINE_HEIGHT - 1);
+			// Interface.
+			drawManager.drawScore(this, this.score);
+			drawManager.drawLives(this, this.lives);
+			drawManager.drawHorizontalLine(this, SEPARATION_LINE_HEIGHT - 1);
 
-		// Countdown to game start.
-		if (!this.inputDelay.checkFinished()) {
-			int countdown = (int) ((INPUT_DELAY
-					- (System.currentTimeMillis()
-							- this.gameStartTime)) / 1000);
-			drawManager.drawCountDown(this, this.level, countdown,
-					this.bonusLife);
-			drawManager.drawHorizontalLine(this, this.height / 2 - this.height
-					/ 12);
-			drawManager.drawHorizontalLine(this, this.height / 2 + this.height
-					/ 12);
+			// Countdown to game start.
+			if (!this.inputDelay.checkFinished()) {
+				int countdown = (int) ((INPUT_DELAY
+						- (System.currentTimeMillis()
+								- this.gameStartTime)) / 1000);
+				drawManager.drawCountDown(this, this.level, countdown,
+						this.bonusLife);
+				drawManager.drawHorizontalLine(this, this.height / 2 - this.height
+						/ 12);
+				drawManager.drawHorizontalLine(this, this.height / 2 + this.height
+						/ 12);
+			}
+
+			drawManager.completeDrawing(this);
 		}
+		else {
+			drawManager.initDrawing(pausescreen);
+			
+			drawManager.drawTitle(this);
+			drawManager.drawPause(this, this.returnCode);
 
-		drawManager.completeDrawing(this);
+			drawManager.completeDrawing(this);
+		}
 	}
+
 
 	/**
 	 * Cleans bullets that go off screen.

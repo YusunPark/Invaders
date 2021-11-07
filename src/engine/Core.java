@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 
 import screen.GameScreen;
 import screen.HighScoreScreen;
+import screen.PauseScreen;
+import screen.SettingScreen;
 import screen.ScoreScreen;
 import screen.Screen;
 import screen.TitleScreen;
@@ -171,6 +173,14 @@ public final class Core {
 						+ " high score screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing high score screen.");
+				break;
+			case 4:
+				// Setting.
+				currentScreen = new SettingScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+				+ " setting screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing setting screen.");
 				break;
 			default:
 				break;
