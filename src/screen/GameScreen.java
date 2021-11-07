@@ -178,6 +178,7 @@ public class GameScreen extends Screen {
 				// keyDown이 아니라 key 입력으로 받고싶은데...
 				if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE))
 					this.isPause = true;
+					
 					draw();
 					while(isPause) {
 						try {
@@ -275,7 +276,7 @@ public class GameScreen extends Screen {
 			
 			drawManager.drawTitle(this);
 			drawManager.drawPause(this, this.returnCode);
-
+			this.logger.info("Paused");
 			drawManager.completeDrawing(this);
 		}
 	}
