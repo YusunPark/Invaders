@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 import screen.GameScreen;
 import screen.HighScoreScreen;
-import screen.PauseScreen;
 import screen.SettingScreen;
 import screen.ScoreScreen;
 import screen.Screen;

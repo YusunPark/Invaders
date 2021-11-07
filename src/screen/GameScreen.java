@@ -3,7 +3,6 @@ package screen;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.ResourceBundle.Control;
 
 import engine.Cooldown;
 import engine.Core;
@@ -15,8 +14,6 @@ import entity.EnemyShip;
 import entity.EnemyShipFormation;
 import entity.Entity;
 import entity.Ship;
-import engine.DrawManager;
-import screen.PauseScreen;
 
 /**
  * Implements the game screen, where the action happens.

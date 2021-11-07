@@ -1,7 +1,5 @@
 package screen;
 
-import java.awt.event.KeyEvent;
-
 import engine.Core;
 import engine.Cooldown;
 
