@@ -72,7 +72,12 @@ public class GameScreen extends Screen {
 	private boolean bonusLife;
 	/** Pause Screen */
 	private Screen pausescreen;
+	/** Check if game is pause */
 	private boolean isPause;
+	/** Check ESC Cooldown */
+	private Cooldown escCooldown; 
+	/** Check if resume is printed on log */
+    private Boolean resumeLogged; 
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -124,7 +129,8 @@ public class GameScreen extends Screen {
 				.getCooldown(BONUS_SHIP_EXPLOSION);
 		this.screenFinishedCooldown = Core.getCooldown(SCREEN_CHANGE_INTERVAL);
 		this.bullets = new HashSet<Bullet>();
-
+		this.escCooldown = Core.getCooldown(100);
+        this.resumeLogged = true;
 		// Special input delay / countdown.
 		this.gameStartTime = System.currentTimeMillis();
 		this.inputDelay = Core.getCooldown(INPUT_DELAY);
@@ -147,7 +153,6 @@ public class GameScreen extends Screen {
 
 	/**
 	 * Updates the elements on screen and checks for events.
-	 * + esc 누르면 퍼즈 화면 출력하게 수정하기
 	 */
 	protected final void update() {
 		super.update();
@@ -177,15 +182,22 @@ public class GameScreen extends Screen {
 				
 				// keyDown이 아니라 key 입력으로 받고싶은데...
 				if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE))
-					this.isPause = true;
+					if (this.escCooldown.checkFinished()){ 
+						this.escCooldown.reset();
+						this.isPause = true;
+					}
 					
 					draw();
 					while(isPause) {
 						try {
 							Thread.sleep(80);
-							if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE))
-								isPause = false;
-								this.returnCode = 2;
+							if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
+								if (this.escCooldown.checkFinished()){
+									this.escCooldown.reset();
+									this.isPause = false;
+								}
+							}
+							this.returnCode = 2;
 							Thread.sleep(80);
 						} catch (InterruptedException e) { }
 				}
@@ -236,6 +248,12 @@ public class GameScreen extends Screen {
 	 */
 	private void draw() {
 		if (!isPause) {
+
+			if (!resumeLogged) {
+				this.logger.info("Resumed");
+				resumeLogged = true;
+			}
+
 			drawManager.initDrawing(this);
 
 			drawManager.drawEntity(this.ship, this.ship.getPositionX(),
@@ -277,6 +295,7 @@ public class GameScreen extends Screen {
 			drawManager.drawTitle(this);
 			drawManager.drawPause(this, this.returnCode);
 			this.logger.info("Paused");
+			this.resumeLogged = false;
 			drawManager.completeDrawing(this);
 		}
 	}
