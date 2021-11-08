@@ -362,7 +362,8 @@ public final class DrawManager {
 	 */
 	public void drawSetting(final Screen screen, final int option) {
 		String titleString = "Back to the title";
-		String muteString = "Mute";
+		String audioString = "Audio Setting";
+		String videoString = "Video Setting";
 
 		if (option == 1)
 			backBufferGraphics.setColor(Color.GREEN);
@@ -374,8 +375,14 @@ public final class DrawManager {
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, muteString, screen.getHeight()
+		drawCenteredRegularString(screen, audioString, screen.getHeight()
 				/ 3 * 2 + fontRegularMetrics.getHeight() * 2);
+		if (option == 6)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, videoString, screen.getHeight()
+				/ 3 * 2 + fontRegularMetrics.getHeight() * 4);
 	}
 
 	/**
