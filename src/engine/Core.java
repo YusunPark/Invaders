@@ -181,6 +181,24 @@ public final class Core {
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing setting screen.");
 				break;
+			case 5:
+				// Mute or Audio Setting
+				// not yet
+				// currentScreen = new AudioScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+				+ " Audio screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing Audio screen.");
+				break;
+			case 6:
+				// Video Setting? fps? something
+				// not yet
+				// currentScreen = new VideoScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+				+ " Video screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing Video screen.");
+				break;
 			default:
 				break;
 			}
