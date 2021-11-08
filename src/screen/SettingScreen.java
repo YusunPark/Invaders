@@ -68,24 +68,30 @@ public class SettingScreen extends Screen {
 
 	// 1 5
     private void nextMenuItem() {
-		if (this.returnCode == 5)
+		if (this.returnCode == 6) {
 			this.returnCode = 1;
-			System.out.println(returnCode);
-		if (this.returnCode == 1)
+		}	
+		else if (this.returnCode == 1){
 			this.returnCode = 5;
-			System.out.println(returnCode);
+		}
+		else {
+			this.returnCode++;
+		}
 	}
 
 	/**
 	 * Shifts the focus to the previous menu item.
 	 */
 	private void previousMenuItem() {
-		if (this.returnCode == 1)
-			this.returnCode = 5;
-			System.out.println(returnCode);
-		if (this.returnCode == 5)
+		if (this.returnCode == 1) {
+			this.returnCode = 6;
+		}
+		else if (this.returnCode == 5){
 			this.returnCode = 1;
-			System.out.println(returnCode);
+		}
+		else {
+			this.returnCode--;
+		}
 	}
 
     /**
