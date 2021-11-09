@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import screen.GameScreen;
 import screen.HighScoreScreen;
+import screen.SettingScreen;
 import screen.ScoreScreen;
 import screen.Screen;
 import screen.TitleScreen;
@@ -171,6 +172,32 @@ public final class Core {
 						+ " high score screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing high score screen.");
+				break;
+			case 4:
+				// Setting.
+				currentScreen = new SettingScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+				+ " setting screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing setting screen.");
+				break;
+			case 5:
+				// Mute or Audio Setting
+				// not yet
+				// currentScreen = new AudioScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+				+ " Audio screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing Audio screen.");
+				break;
+			case 6:
+				// Video Setting? fps? something
+				// not yet
+				// currentScreen = new VideoScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+				+ " Video screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing Video screen.");
 				break;
 			default:
 				break;
