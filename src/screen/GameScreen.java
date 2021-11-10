@@ -72,6 +72,8 @@ public class GameScreen extends Screen {
 	private boolean bonusLife;
 	/** Pause Screen */
 	private Screen pausescreen;
+
+	private Screen titlescreen;
 	/** Check if game is pause */
 	private boolean isPause;
 	/** Check ESC Cooldown */
@@ -146,7 +148,7 @@ public class GameScreen extends Screen {
 
 		this.score += LIFE_SCORE * (this.lives - 1);
 		this.logger.info("Screen cleared with a score of " + this.score);
-		
+
 		return this.returnCode;
 	}
 
@@ -228,7 +230,17 @@ public class GameScreen extends Screen {
 
 		if (this.levelFinished && this.screenFinishedCooldown.checkFinished())
 			this.isRunning = false;
+		
+		if (this.returnCode == 1) {
+			this.isPause = false;
 
+			this.titlescreen = new screen.TitleScreen(this.width, this.height, this.fps);
+			returnCode = titlescreen.run();
+
+			this.levelFinished = true;
+			this.screenFinishedCooldown.reset();
+			this.isRunning = false;
+		}
 	}
 
 	/**
