@@ -111,6 +111,7 @@ public class GameScreen extends Screen {
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
 		this.isPause = false;
+		this.returnCode = 2;
 	}
 
 	/**
@@ -233,11 +234,9 @@ public class GameScreen extends Screen {
 		
 		if (this.returnCode == 1) {
 			this.isPause = false;
-
+			this.lives = 0;
 			this.titlescreen = new screen.TitleScreen(this.width, this.height, this.fps);
 			returnCode = titlescreen.run();
-
-			this.levelFinished = true;
 			this.screenFinishedCooldown.reset();
 			this.isRunning = false;
 		}

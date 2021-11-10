@@ -66,6 +66,14 @@ public class PauseScreen extends Screen {
 				this.isRunning = false;
 				return;
 			}
+			if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
+				this.returnCode = 2;
+				this.isRunning = false;
+
+				return;
+			}
+
+
 		}
     }
 

@@ -344,20 +344,20 @@ public final class DrawManager {
 	 *            Option selected.
 	 */
 	public void drawPause(final Screen screen, final int option) {
-		String restartString = "Go to Restart";
 		String goMenuString = "Go to Menu";
+		String restartString = "Go to Restart";
 		
 		if (option == 1)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, restartString,
+		drawCenteredRegularString(screen, goMenuString,
 				screen.getHeight() / 3 * 2);
 		if (option == 7)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, goMenuString, screen.getHeight()
+		drawCenteredRegularString(screen, restartString, screen.getHeight()
 				/ 3 * 2 + fontRegularMetrics.getHeight() * 2);
 	}
 
