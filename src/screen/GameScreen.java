@@ -108,7 +108,6 @@ public class GameScreen extends Screen {
 			this.lives++;
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
-		this.pausescreen = new PauseScreen(width, height, fps);
 		this.isPause = false;
 	}
 
@@ -147,7 +146,7 @@ public class GameScreen extends Screen {
 
 		this.score += LIFE_SCORE * (this.lives - 1);
 		this.logger.info("Screen cleared with a score of " + this.score);
-
+		
 		return this.returnCode;
 	}
 
@@ -181,27 +180,16 @@ public class GameScreen extends Screen {
 						this.bulletsShot++;
 				
 				// keyDown이 아니라 key 입력으로 받고싶은데...
-				if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE))
-					if (this.escCooldown.checkFinished()){ 
-						this.escCooldown.reset();
-						this.isPause = true;
-					}
-					
-					draw();
-					while(isPause) {
-						try {
-							Thread.sleep(80);
-							if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
-								if (this.escCooldown.checkFinished()){
-									this.escCooldown.reset();
-									this.isPause = false;
-								}
-							}
-							this.returnCode = 2;
-							Thread.sleep(80);
-						} catch (InterruptedException e) { }
+				if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
+					if (isPause == false)
+						if (this.escCooldown.checkFinished()){ 
+							this.escCooldown.reset();
+							this.isPause = true;
+							this.returnCode = 10;
+						}
+
 				}
-				
+						
 			}
 
 			if (this.enemyShipSpecial != null) {
@@ -290,6 +278,7 @@ public class GameScreen extends Screen {
 			drawManager.completeDrawing(this);
 		}
 		else {
+			this.pausescreen = new PauseScreen(width, height, fps);
 			drawManager.initDrawing(pausescreen);
 			
 			drawManager.drawTitle(this);
@@ -297,6 +286,28 @@ public class GameScreen extends Screen {
 			this.logger.info("Paused");
 			this.resumeLogged = false;
 			drawManager.completeDrawing(this);
+			while(isPause) {
+				try {
+					Thread.sleep(80);
+					this.returnCode = pausescreen.run();
+
+					if (this.returnCode == 1) {
+						return;
+						
+					}
+					
+					if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
+						if (this.escCooldown.checkFinished()){
+							this.escCooldown.reset();
+							this.isPause = false;
+							this.returnCode = 2;
+							// System.out.println("Asdfasfd");
+						}
+					}
+					
+					Thread.sleep(80);
+				} catch (InterruptedException e) { }
+			}
 		}
 	}
 
