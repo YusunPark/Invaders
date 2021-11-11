@@ -144,7 +144,6 @@ public final class Core {
 					returnCode = frame.setScreen(currentScreen);
 					
 					LOGGER.info("Closing game screen.");
-					if(returnCode != 1) break; 
 					gameState = ((GameScreen) currentScreen).getGameState();
 
 					gameState = new GameState(gameState.getLevel() + 1,
@@ -152,6 +151,10 @@ public final class Core {
 							gameState.getLivesRemaining(),
 							gameState.getBulletsShot(),
 							gameState.getShipsDestroyed());
+					if(returnCode != 2) {
+						break;
+					}
+
 
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
