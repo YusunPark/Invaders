@@ -304,15 +304,23 @@ public class GameScreen extends Screen {
 
 					if (this.returnCode == 1) {
 						return;
-						
 					}
-					
-					if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
+
+					else if (this.returnCode == 7) {
+						this.level = 1;
+						this.score = 0;
+						this.lives = 3;
+						initialize();
+						this.logger.info("Restart");
+						this.isPause = false;
+						this.returnCode = 2;
+					}
+
+				if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
 						if (this.escCooldown.checkFinished()){
 							this.escCooldown.reset();
 							this.isPause = false;
 							this.returnCode = 2;
-							// System.out.println("Asdfasfd");
 						}
 					}
 					
