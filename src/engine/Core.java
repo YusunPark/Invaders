@@ -141,9 +141,9 @@ public final class Core {
 							bonusLife, width, height, FPS);
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " game screen at " + FPS + " fps.");
-					frame.setScreen(currentScreen);
+					returnCode = frame.setScreen(currentScreen);
+					
 					LOGGER.info("Closing game screen.");
-
 					gameState = ((GameScreen) currentScreen).getGameState();
 
 					gameState = new GameState(gameState.getLevel() + 1,
@@ -151,6 +151,10 @@ public final class Core {
 							gameState.getLivesRemaining(),
 							gameState.getBulletsShot(),
 							gameState.getShipsDestroyed());
+					if(returnCode != 2) {
+						break;
+					}
+
 
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
@@ -161,16 +165,18 @@ public final class Core {
 						+ gameState.getLivesRemaining() + " lives remaining, "
 						+ gameState.getBulletsShot() + " bullets shot and "
 						+ gameState.getShipsDestroyed() + " ships destroyed.");
-				currentScreen = new ScoreScreen(width, height, FPS, gameState);
-				returnCode = frame.setScreen(currentScreen);
-				LOGGER.info("Closing score screen.");
+				if(returnCode == 2) {
+					currentScreen = new ScoreScreen(width, height, FPS, gameState);
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing score screen.");
+				}		
 				break;
 			case 3:
 				// High scores.
 				currentScreen = new HighScoreScreen(width, height, FPS);
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " high score screen at " + FPS + " fps.");
-				returnCode = frame.setScreen(currentScreen);
+				returnCode = frame.setScreen(currentScreen);			
 				LOGGER.info("Closing high score screen.");
 				break;
 			case 4:
@@ -188,7 +194,7 @@ public final class Core {
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 				+ " Audio screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);
-				LOGGER.info("Closing Audio screen.");
+				LOGGER.info("Closing Audio screen.");				
 				break;
 			case 6:
 				// Video Setting? fps? something
