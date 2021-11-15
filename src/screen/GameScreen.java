@@ -229,8 +229,9 @@ public class GameScreen extends Screen {
 			this.screenFinishedCooldown.reset();
 		}
 
-		if (this.levelFinished && this.screenFinishedCooldown.checkFinished())
+		if (this.levelFinished && this.screenFinishedCooldown.checkFinished()) {
 			this.isRunning = false;
+		}
 		
 		if (this.returnCode == 1) {
 			this.isPause = false;
@@ -367,6 +368,13 @@ public class GameScreen extends Screen {
 						&& !this.enemyShipSpecial.isDestroyed()
 						&& checkCollision(bullet, this.enemyShipSpecial)) {
 					this.score += this.enemyShipSpecial.getPointValue();
+					/** 
+					* Test for kill reward
+					* 확률로 돌려서 결과를 정해주고 log로 알려주면 스페셜몹 보상 구현 끝날듯....?
+					* 추가로 상자는 여기서 처치되면 -> 상자 쏘기로 연결해서 구현하면 가능해보임
+					* ship.increase_Numofbullets();
+					* ship.decrease_Interval();
+					*  */ 
 					this.shipsDestroyed++;
 					this.enemyShipSpecial.destroy();
 					this.enemyShipSpecialExplosionCooldown.reset();
