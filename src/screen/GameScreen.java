@@ -37,6 +37,9 @@ public class GameScreen extends Screen {
 	private static final int SCREEN_CHANGE_INTERVAL = 1500;
 	/** Height of the interface separation line. */
 	private static final int SEPARATION_LINE_HEIGHT = 40;
+	/** Difficulty settings for level 1. */
+	private static final GameSettings RESTART_SETTING =
+			new GameSettings(5, 4, 60, 2000);
 
 	/** Current game difficulty settings. */
 	private GameSettings gameSettings;
@@ -72,7 +75,7 @@ public class GameScreen extends Screen {
 	private boolean bonusLife;
 	/** Pause Screen */
 	private Screen pausescreen;
-
+	/** Title Screen */
 	private Screen titlescreen;
 	/** Check if game is pause */
 	private boolean isPause;
@@ -300,15 +303,26 @@ public class GameScreen extends Screen {
 
 					if (this.returnCode == 1) {
 						return;
-						
 					}
-					
-					if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
+
+					else if (this.returnCode == 7) {
+						this.level = 1;
+						this.score = 0;
+						this.lives = 3;
+						this.bulletsShot = 0;
+						this.shipsDestroyed = 0;
+						this.gameSettings = RESTART_SETTING;
+						initialize();
+						this.logger.info("Restart");
+						this.isPause = false;
+						this.returnCode = 2;
+					}
+
+				if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
 						if (this.escCooldown.checkFinished()){
 							this.escCooldown.reset();
 							this.isPause = false;
 							this.returnCode = 2;
-							// System.out.println("Asdfasfd");
 						}
 					}
 					
