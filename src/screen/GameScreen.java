@@ -8,12 +8,7 @@ import engine.Cooldown;
 import engine.Core;
 import engine.GameSettings;
 import engine.GameState;
-import entity.Bullet;
-import entity.BulletPool;
-import entity.EnemyShip;
-import entity.EnemyShipFormation;
-import entity.Entity;
-import entity.Ship;
+import entity.*;
 
 /**
  * Implements the game screen, where the action happens.
@@ -37,6 +32,7 @@ public class GameScreen extends Screen {
 	private static final int SCREEN_CHANGE_INTERVAL = 1500;
 	/** Height of the interface separation line. */
 	private static final int SEPARATION_LINE_HEIGHT = 40;
+
 
 	/** Current game difficulty settings. */
 	private GameSettings gameSettings;
@@ -182,7 +178,6 @@ public class GameScreen extends Screen {
 					if (this.ship.shoot(this.bullets))
 						this.bulletsShot++;
 				
-				// keyDown이 아니라 key 입력으로 받고싶은데...
 				if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
 					if (isPause == false)
 						if (this.escCooldown.checkFinished()){ 
@@ -196,11 +191,18 @@ public class GameScreen extends Screen {
 			}
 
 			if (this.enemyShipSpecial != null) {
-				if (!this.enemyShipSpecial.isDestroyed())
+				if (!this.enemyShipSpecial.isDestroyed()){
 					this.enemyShipSpecial.move(2, 0);
-				else if (this.enemyShipSpecialExplosionCooldown.checkFinished())
+				}
+				else if (this.enemyShipSpecialExplosionCooldown.checkFinished()){
+					int destroyed_x = enemyShipSpecial.getPositionX() + enemyShipSpecial.getWidth()/2;
+					int destroyed_y = enemyShipSpecial.getPositionY();
 					this.enemyShipSpecial = null;
-
+					this.logger.info("A reward bullet appears");
+					RewardBullet rewardBullet = new RewardBullet(destroyed_x, destroyed_y);
+					rewardBullet.setPositionX(destroyed_x - rewardBullet.getWidth() / 2);
+					bullets.add(rewardBullet);
+				}
 			}
 			if (this.enemyShipSpecial == null
 					&& this.enemyShipSpecialCooldown.checkFinished()) {
@@ -348,10 +350,16 @@ public class GameScreen extends Screen {
 				if (checkCollision(bullet, this.ship) && !this.levelFinished) {
 					recyclable.add(bullet);
 					if (!this.ship.isDestroyed()) {
-						this.ship.destroy();
-						this.lives--;
-						this.logger.info("Hit on player ship, " + this.lives
-								+ " lives remaining.");
+						if (bullet instanceof RewardBullet){
+							this.logger.info("Reward acquire.");
+							((RewardBullet) bullet).getReward();
+						}
+						else {
+							this.ship.destroy();
+							this.lives--;
+							this.logger.info("Hit on player ship, " + this.lives
+									+ " lives remaining.");
+						}
 					}
 				}
 			} else {
