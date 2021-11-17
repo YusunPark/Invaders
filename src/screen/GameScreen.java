@@ -236,11 +236,7 @@ public class GameScreen extends Screen {
 			this.isRunning = false;
 		
 		if (this.returnCode == 1) {
-			this.isPause = false;
-			this.lives = 0;
-			this.titlescreen = new screen.TitleScreen(this.width, this.height, this.fps);
-			returnCode = titlescreen.run();
-			this.screenFinishedCooldown.reset();
+			this.logger.info("Go to menu");
 			this.isRunning = false;
 		}
 	}
