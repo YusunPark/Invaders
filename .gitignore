@@ -172,4 +172,4 @@ log*
 *.ttf
 .checkstyle
 *.iml
-*.xml
+# *.xml
