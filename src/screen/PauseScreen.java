@@ -25,7 +25,7 @@ public class PauseScreen extends Screen {
 	 */
     public PauseScreen(final int width, final int height, final int fps) {
         super(width, height, fps);
-		this.returnCode = 1;
+		this.returnCode = 7;
 		this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
 		this.selectionCooldown.reset();
     }
@@ -78,8 +78,8 @@ public class PauseScreen extends Screen {
     }
 
     private void nextMenuItem() {
-		 if (this.returnCode == 1) {
-			this.returnCode = 7;
+		 if (this.returnCode == 7) {
+			this.returnCode = 1;
 		}	
 
 	}
@@ -88,8 +88,8 @@ public class PauseScreen extends Screen {
 	 * Shifts the focus to the previous menu item.
 	 */
 	private void previousMenuItem() {
-		if (this.returnCode == 7) {
-			this.returnCode = 1;
+		if (this.returnCode == 1) {
+			this.returnCode = 7;
 		}	
 
 	}
