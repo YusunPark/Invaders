@@ -173,3 +173,9 @@ log*
 .checkstyle
 *.iml
 # *.xml
+
+##############
+## IDE Setting
+##############
+demo/
+.vscode/
