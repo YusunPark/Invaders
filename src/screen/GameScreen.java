@@ -23,7 +23,7 @@ public class GameScreen extends Screen {
 	/** Bonus score for each life remaining at the end of the level. */
 	private static final int LIFE_SCORE = 100;
 	/** Minimum time between bonus ship's appearances. */
-	private static final int BONUS_SHIP_INTERVAL = 20000;
+	private static final int BONUS_SHIP_INTERVAL = 15000;
 	/** Maximum variance in the time between bonus ship's appearances. */
 	private static final int BONUS_SHIP_VARIANCE = 10000;
 	/** Time until bonus ship explosion disappears. */
@@ -148,7 +148,6 @@ public class GameScreen extends Screen {
 
 		this.score += LIFE_SCORE * (this.lives - 1);
 		this.logger.info("Screen cleared with a score of " + this.score);
-
 		return this.returnCode;
 	}
 
@@ -363,7 +362,7 @@ public class GameScreen extends Screen {
 					if (!this.ship.isDestroyed()) {
 						if (bullet instanceof RewardBullet){
 							this.logger.info("Reward acquire.");
-							((RewardBullet) bullet).getReward();
+							this.getReward();
 						}
 						else {
 							this.ship.destroy();
@@ -388,8 +387,6 @@ public class GameScreen extends Screen {
 					this.score += this.enemyShipSpecial.getPointValue();
 					/** 
 					* Test for kill reward
-					* 확률로 돌려서 결과를 정해주고 log로 알려주면 스페셜몹 보상 구현 끝날듯....?
-					* 추가로 상자는 여기서 처치되면 -> 상자 쏘기로 연결해서 구현하면 가능해보임
 					* ship.increase_Numofbullets();
 					* ship.decrease_Interval();
 					*  */ 
@@ -426,6 +423,33 @@ public class GameScreen extends Screen {
 		int distanceY = Math.abs(centerAY - centerBY);
 
 		return distanceX < maxDistanceX && distanceY < maxDistanceY;
+	}
+
+	private void getReward() {
+		// 한 스테이지에서만 적용
+		int tmp = (int)(Math.random() * 5);
+		this.logger.info("get reward...");
+		switch(tmp) {
+		case 1:
+			ship.increase_Numofbullets();
+			this.logger.info("shoot more!");
+			break;
+		case 2:
+			ship.decrease_Interval();
+			this.logger.info("shoot faster!");
+			break;
+		case 3:
+			ship.increase_BulletSpeed();
+			this.logger.info("bullets are going faster!");
+			break;
+		case 4:
+			ship.increase_Speed();
+			this.logger.info("move faster!");
+			break;
+		default:
+			this.logger.info("Oops! not in here!");
+			break;
+		}
 	}
 
 	/**
