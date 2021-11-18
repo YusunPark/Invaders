@@ -71,8 +71,6 @@ public class GameScreen extends Screen {
 	private boolean bonusLife;
 	/** Pause Screen */
 	private Screen pausescreen;
-	/** Title Screen */
-	private Screen titlescreen;
 	/** Check if game is pause */
 	private boolean isPause;
 	/** Check ESC Cooldown */
