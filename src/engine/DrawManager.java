@@ -75,7 +75,9 @@ public final class DrawManager {
 		/** Bonus ship. */
 		EnemyShipSpecial,
 		/** Destroyed enemy ship. */
-		Explosion
+		Explosion,
+		/** Reward bullet. */
+		RewardBullet
 	};
 
 	/**
@@ -101,6 +103,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
 			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
 			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
+			spriteMap.put(SpriteType.RewardBullet, new boolean[7][7]);
 
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
@@ -345,19 +348,19 @@ public final class DrawManager {
 	 */
 	public void drawPause(final Screen screen, final int option) {
 		String goMenuString = "Go to Menu";
-		String restartString = "Go to Restart";
+		String restartString = "Restart";
 		
-		if (option == 1)
-			backBufferGraphics.setColor(Color.GREEN);
-		else
-			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, goMenuString,
-				screen.getHeight() / 3 * 2);
 		if (option == 7)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, restartString, screen.getHeight()
+		drawCenteredRegularString(screen, restartString,
+				screen.getHeight() / 3 * 2);
+		if (option == 1)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, goMenuString, screen.getHeight()
 				/ 3 * 2 + fontRegularMetrics.getHeight() * 2);
 	}
 

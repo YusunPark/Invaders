@@ -8,12 +8,7 @@ import engine.Cooldown;
 import engine.Core;
 import engine.GameSettings;
 import engine.GameState;
-import entity.Bullet;
-import entity.BulletPool;
-import entity.EnemyShip;
-import entity.EnemyShipFormation;
-import entity.Entity;
-import entity.Ship;
+import entity.*;
 
 /**
  * Implements the game screen, where the action happens.
@@ -37,6 +32,10 @@ public class GameScreen extends Screen {
 	private static final int SCREEN_CHANGE_INTERVAL = 1500;
 	/** Height of the interface separation line. */
 	private static final int SEPARATION_LINE_HEIGHT = 40;
+	/** Difficulty settings for level 1. */
+	private static final GameSettings RESTART_SETTING =
+			new GameSettings(5, 4, 60, 2000);
+
 
 	/** Current game difficulty settings. */
 	private GameSettings gameSettings;
@@ -72,7 +71,7 @@ public class GameScreen extends Screen {
 	private boolean bonusLife;
 	/** Pause Screen */
 	private Screen pausescreen;
-
+	/** Title Screen */
 	private Screen titlescreen;
 	/** Check if game is pause */
 	private boolean isPause;
@@ -182,7 +181,6 @@ public class GameScreen extends Screen {
 					if (this.ship.shoot(this.bullets))
 						this.bulletsShot++;
 				
-				// keyDown이 아니라 key 입력으로 받고싶은데...
 				if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
 					if (isPause == false)
 						if (this.escCooldown.checkFinished()){ 
@@ -196,11 +194,18 @@ public class GameScreen extends Screen {
 			}
 
 			if (this.enemyShipSpecial != null) {
-				if (!this.enemyShipSpecial.isDestroyed())
+				if (!this.enemyShipSpecial.isDestroyed()){
 					this.enemyShipSpecial.move(2, 0);
-				else if (this.enemyShipSpecialExplosionCooldown.checkFinished())
+				}
+				else if (this.enemyShipSpecialExplosionCooldown.checkFinished()){
+					int destroyed_x = enemyShipSpecial.getPositionX() + enemyShipSpecial.getWidth()/2;
+					int destroyed_y = enemyShipSpecial.getPositionY();
 					this.enemyShipSpecial = null;
-
+					this.logger.info("A reward bullet appears");
+					RewardBullet rewardBullet = new RewardBullet(destroyed_x, destroyed_y);
+					rewardBullet.setPositionX(destroyed_x - rewardBullet.getWidth() / 2);
+					bullets.add(rewardBullet);
+				}
 			}
 			if (this.enemyShipSpecial == null
 					&& this.enemyShipSpecialCooldown.checkFinished()) {
@@ -234,11 +239,7 @@ public class GameScreen extends Screen {
 		}
 		
 		if (this.returnCode == 1) {
-			this.isPause = false;
-			this.lives = 0;
-			this.titlescreen = new screen.TitleScreen(this.width, this.height, this.fps);
-			returnCode = titlescreen.run();
-			this.screenFinishedCooldown.reset();
+			this.logger.info("Go to menu");
 			this.isRunning = false;
 		}
 	}
@@ -305,15 +306,26 @@ public class GameScreen extends Screen {
 
 					if (this.returnCode == 1) {
 						return;
-						
 					}
-					
-					if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
+
+					else if (this.returnCode == 7) {
+						this.level = 1;
+						this.score = 0;
+						this.lives = 3;
+						this.bulletsShot = 0;
+						this.shipsDestroyed = 0;
+						this.gameSettings = RESTART_SETTING;
+						initialize();
+						this.logger.info("Restart");
+						this.isPause = false;
+						this.returnCode = 2;
+					}
+
+				if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
 						if (this.escCooldown.checkFinished()){
 							this.escCooldown.reset();
 							this.isPause = false;
 							this.returnCode = 2;
-							// System.out.println("Asdfasfd");
 						}
 					}
 					
@@ -349,10 +361,16 @@ public class GameScreen extends Screen {
 				if (checkCollision(bullet, this.ship) && !this.levelFinished) {
 					recyclable.add(bullet);
 					if (!this.ship.isDestroyed()) {
-						this.ship.destroy();
-						this.lives--;
-						this.logger.info("Hit on player ship, " + this.lives
-								+ " lives remaining.");
+						if (bullet instanceof RewardBullet){
+							this.logger.info("Reward acquire.");
+							((RewardBullet) bullet).getReward();
+						}
+						else {
+							this.ship.destroy();
+							this.lives--;
+							this.logger.info("Hit on player ship, " + this.lives
+									+ " lives remaining.");
+						}
 					}
 				}
 			} else {
