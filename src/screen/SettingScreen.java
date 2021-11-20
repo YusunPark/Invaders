@@ -14,8 +14,6 @@ public class SettingScreen extends Screen {
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
 
-	private MusicManager musicmanager = new MusicManager();
-
     /**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -50,7 +48,7 @@ public class SettingScreen extends Screen {
 	 */
     protected final void update() {
 		super.update();
-		musicmanager.run_main();
+		MusicManager.run_main();
         draw();
 		if (this.selectionCooldown.checkFinished()
 				&& this.inputDelay.checkFinished()) {

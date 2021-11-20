@@ -14,8 +14,6 @@ public class PauseScreen extends Screen {
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
 
-	private MusicManager musicmanager = new MusicManager();
-
     /**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -49,7 +47,7 @@ public class PauseScreen extends Screen {
 	 */
     protected final void update() {
 		super.update();
-		musicmanager.run_game();
+		MusicManager.run_game();
 		// 화면에서 옵션 선택 메뉴 구현
 		draw();
 

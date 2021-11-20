@@ -47,8 +47,6 @@ public class ScoreScreen extends Screen {
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
 
-	private MusicManager musicmanager = new MusicManager();
-
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -103,7 +101,7 @@ public class ScoreScreen extends Screen {
 	 */
 	protected final void update() {
 		super.update();
-		musicmanager.run_game();
+		MusicManager.run_game();
 		draw();
 		if (this.inputDelay.checkFinished()) {
 			if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)) {

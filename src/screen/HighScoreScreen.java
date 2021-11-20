@@ -19,8 +19,6 @@ public class HighScoreScreen extends Screen {
 	/** List of past high scores. */
 	private List<Score> highScores;
 
-	private MusicManager musicmanager = new MusicManager();
-
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -60,7 +58,7 @@ public class HighScoreScreen extends Screen {
 	 */
 	protected final void update() {
 		super.update();
-		musicmanager.run_main();
+		MusicManager.run_main();
 		draw();
 		if (inputManager.isKeyDown(KeyEvent.VK_SPACE)
 				&& this.inputDelay.checkFinished())
