@@ -78,8 +78,6 @@ public class GameScreen extends Screen {
 	private Cooldown escCooldown; 
 	/** Check if resume is printed on log */
     private Boolean resumeLogged; 
-	/** Music manager */
-	private MusicManager musicmanager = new MusicManager();
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -181,7 +179,7 @@ public class GameScreen extends Screen {
 				}
 				if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
 					if (this.ship.shoot(this.bullets)) {
-						musicmanager.run_shoot();
+						MusicManager.run_shoot();
 						this.bulletsShot++;
 					}
 				
@@ -193,9 +191,7 @@ public class GameScreen extends Screen {
 							this.returnCode = 10;
 						}
 					}
-
 				}
-						
 			}
 
 			if (this.enemyShipSpecial != null) {
@@ -292,7 +288,6 @@ public class GameScreen extends Screen {
 				drawManager.drawHorizontalLine(this, this.height / 2 + this.height
 						/ 12);
 			}
-
 			drawManager.completeDrawing(this);
 		}
 		else {
@@ -331,8 +326,6 @@ public class GameScreen extends Screen {
 						this.isPause = false;
 						this.escCooldown.reset();
 					}
-
-					
 					Thread.sleep(80);
 				} catch (InterruptedException e) { }
 			}
@@ -390,11 +383,6 @@ public class GameScreen extends Screen {
 						&& !this.enemyShipSpecial.isDestroyed()
 						&& checkCollision(bullet, this.enemyShipSpecial)) {
 					this.score += this.enemyShipSpecial.getPointValue();
-					/** 
-					* Test for kill reward
-					* ship.increase_Numofbullets();
-					* ship.decrease_Interval();
-					*  */ 
 					this.shipsDestroyed++;
 					this.enemyShipSpecial.destroy();
 					this.enemyShipSpecialExplosionCooldown.reset();

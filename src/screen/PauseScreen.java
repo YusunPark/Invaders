@@ -73,16 +73,16 @@ public class PauseScreen extends Screen {
 
 				return;
 			}
-
-
 		}
     }
 
+	/**
+	 * Shifts the focus to the next menu item.
+	 */
     private void nextMenuItem() {
 		 if (this.returnCode == 7) {
 			this.returnCode = 1;
 		}	
-
 	}
 
 	/**
@@ -92,7 +92,6 @@ public class PauseScreen extends Screen {
 		if (this.returnCode == 1) {
 			this.returnCode = 7;
 		}	
-
 	}
 
     /**

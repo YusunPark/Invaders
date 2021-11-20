@@ -31,7 +31,7 @@ public class MusicManager {
      * Method for running shooting sound.
      * 
      */
-    public void run_shoot() {
+    public static void run_shoot() {
         try {
             AudioInputStream stream = AudioSystem.getAudioInputStream(shoot);
             Clip clip = AudioSystem.getClip();
@@ -41,7 +41,6 @@ public class MusicManager {
             //TODO: handle exception
             e.printStackTrace();
         }
-        
     }
 
     /** 
@@ -122,6 +121,12 @@ public class MusicManager {
         }
     }
 
+
+    /**
+     * Make Main lobby BGM Clip.
+     * 
+     * @return Lobby BGM Clip
+     */
     private static Clip make_main_Clip() {
         Clip clip;
         try {
@@ -136,6 +141,11 @@ public class MusicManager {
         }
     }
 
+    /**
+     * Make In-Game BGM Clip.
+     * 
+     * @return In-Game BGM Clip
+     */
     private static Clip make_game_Clip() {
         Clip clip;
         try {

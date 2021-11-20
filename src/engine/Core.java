@@ -154,7 +154,6 @@ public final class Core {
 						break;
 					}
 
-
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
 
@@ -208,7 +207,6 @@ public final class Core {
 			default:
 				break;
 			}
-
 		} while (returnCode != 0);
 
 		fileHandler.flush();

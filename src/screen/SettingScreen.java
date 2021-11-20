@@ -67,7 +67,9 @@ public class SettingScreen extends Screen {
 		}
     }
 
-	// 1 5
+	/**
+	 * Shifts the focus to the next menu item.
+	 */
     private void nextMenuItem() {
 		if (this.returnCode == 6) {
 			this.returnCode = 1;
