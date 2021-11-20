@@ -102,11 +102,9 @@ public class Screen {
 		return 0;
 	}
 
-
 	protected void update() {
-		runMusic();
-	}
 
+	}
 	/**
 	 * Getter for screen width.
 	 * 
@@ -123,12 +121,5 @@ public class Screen {
 	 */
 	public final int getHeight() {
 		return this.height;
-	}
-
-	private void runMusic() {
-		if(musicmanager.mainCooldown.checkFinished()) { 
-			musicmanager.run_main();
-			musicmanager.mainCooldown.reset();
-		}
 	}
 }

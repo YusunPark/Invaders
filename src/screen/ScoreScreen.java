@@ -8,6 +8,7 @@ import java.util.List;
 import engine.Cooldown;
 import engine.Core;
 import engine.GameState;
+import engine.MusicManager;
 import engine.Score;
 
 /**
@@ -45,6 +46,8 @@ public class ScoreScreen extends Screen {
 	private int nameCharSelected;
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
+
+	private MusicManager musicmanager = new MusicManager();
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -100,7 +103,7 @@ public class ScoreScreen extends Screen {
 	 */
 	protected final void update() {
 		super.update();
-
+		musicmanager.run_game();
 		draw();
 		if (this.inputDelay.checkFinished()) {
 			if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)) {

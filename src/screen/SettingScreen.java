@@ -3,6 +3,7 @@ package screen;
 import java.awt.event.KeyEvent;
 
 import engine.Core;
+import engine.MusicManager;
 import engine.Cooldown;
 
 public class SettingScreen extends Screen {
@@ -12,6 +13,8 @@ public class SettingScreen extends Screen {
 	
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
+
+	private MusicManager musicmanager = new MusicManager();
 
     /**
 	 * Constructor, establishes the properties of the screen.
@@ -47,7 +50,7 @@ public class SettingScreen extends Screen {
 	 */
     protected final void update() {
 		super.update();
-
+		musicmanager.run_main();
         draw();
 		if (this.selectionCooldown.checkFinished()
 				&& this.inputDelay.checkFinished()) {

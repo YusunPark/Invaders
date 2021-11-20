@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import engine.Core;
+import engine.MusicManager;
 import engine.Score;
 
 /**
@@ -17,6 +18,8 @@ public class HighScoreScreen extends Screen {
 
 	/** List of past high scores. */
 	private List<Score> highScores;
+
+	private MusicManager musicmanager = new MusicManager();
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -47,6 +50,7 @@ public class HighScoreScreen extends Screen {
 	 */
 	public final int run() {
 		super.run();
+
 		draw();
 		return this.returnCode;
 	}
@@ -56,7 +60,7 @@ public class HighScoreScreen extends Screen {
 	 */
 	protected final void update() {
 		super.update();
-
+		musicmanager.run_main();
 		draw();
 		if (inputManager.isKeyDown(KeyEvent.VK_SPACE)
 				&& this.inputDelay.checkFinished())

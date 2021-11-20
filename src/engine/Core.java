@@ -73,6 +73,8 @@ public final class Core {
 	/** Logger handler for printing to console. */
 	private static ConsoleHandler consoleHandler;
 
+	private static MusicManager musicmanager = new MusicManager();
+
 
 	/**
 	 * Test implementation.
@@ -139,6 +141,7 @@ public final class Core {
 					currentScreen = new GameScreen(gameState,
 							gameSettings.get(gameState.getLevel() - 1),
 							bonusLife, width, height, FPS);
+					
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " game screen at " + FPS + " fps.");
 					returnCode = frame.setScreen(currentScreen);
@@ -175,6 +178,7 @@ public final class Core {
 			case 3:
 				// High scores.
 				currentScreen = new HighScoreScreen(width, height, FPS);
+				
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " high score screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);			
@@ -183,6 +187,7 @@ public final class Core {
 			case 4:
 				// Setting.
 				currentScreen = new SettingScreen(width, height, FPS);
+				
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 				+ " setting screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);

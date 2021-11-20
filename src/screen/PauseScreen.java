@@ -3,6 +3,7 @@ package screen;
 import java.awt.event.KeyEvent;
 
 import engine.Core;
+import engine.MusicManager;
 import engine.Cooldown;
 
 public class PauseScreen extends Screen {
@@ -12,6 +13,8 @@ public class PauseScreen extends Screen {
 	
 	/** Time between changes in user selection. */
 	private Cooldown selectionCooldown;
+
+	private MusicManager musicmanager = new MusicManager();
 
     /**
 	 * Constructor, establishes the properties of the screen.
@@ -46,10 +49,10 @@ public class PauseScreen extends Screen {
 	 */
     protected final void update() {
 		super.update();
-
+		musicmanager.run_game();
 		// 화면에서 옵션 선택 메뉴 구현
 		draw();
- 
+
 		if (this.selectionCooldown.checkFinished()
 				&& this.inputDelay.checkFinished()) {
 			if (inputManager.isKeyDown(KeyEvent.VK_UP)

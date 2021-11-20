@@ -158,7 +158,7 @@ public class GameScreen extends Screen {
 	 */
 	protected final void update() {
 		super.update();
-
+		musicmanager.run_game();
 		if (this.inputDelay.checkFinished() && !this.levelFinished) {
 
 			if (!this.ship.isDestroyed()) {
@@ -321,6 +321,7 @@ public class GameScreen extends Screen {
 						initialize();
 						this.logger.info("Restart");
 						this.isPause = false;
+						this.update();
 						this.returnCode = 2;
 					}
 
