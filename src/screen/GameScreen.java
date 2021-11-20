@@ -132,7 +132,8 @@ public class GameScreen extends Screen {
 				.getCooldown(BONUS_SHIP_EXPLOSION);
 		this.screenFinishedCooldown = Core.getCooldown(SCREEN_CHANGE_INTERVAL);
 		this.bullets = new HashSet<Bullet>();
-		this.escCooldown = Core.getCooldown(100);
+		this.escCooldown = Core.getCooldown(500);
+		this.escCooldown.reset();
         this.resumeLogged = true;
 		// Special input delay / countdown.
 		this.gameStartTime = System.currentTimeMillis();
@@ -185,12 +186,13 @@ public class GameScreen extends Screen {
 					}
 				
 				if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
-					if (isPause == false)
-						if (this.escCooldown.checkFinished()){ 
+					if (isPause == false) {
+						if (this.escCooldown.checkFinished()){
 							this.escCooldown.reset();
 							this.isPause = true;
 							this.returnCode = 10;
 						}
+					}
 
 				}
 						
@@ -325,13 +327,11 @@ public class GameScreen extends Screen {
 						this.returnCode = 2;
 					}
 
-				if (this.inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
-						if (this.escCooldown.checkFinished()){
-							this.escCooldown.reset();
-							this.isPause = false;
-							this.returnCode = 2;
-						}
+					else if (this.returnCode == 2){
+						this.isPause = false;
+						this.escCooldown.reset();
 					}
+
 					
 					Thread.sleep(80);
 				} catch (InterruptedException e) { }
