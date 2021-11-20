@@ -115,7 +115,6 @@ public class MusicManager {
             AudioInputStream stream = AudioSystem.getAudioInputStream(come_boss);
             Clip clip = AudioSystem.getClip();
             clip.open(stream);
-            clip.loop(clip.LOOP_CONTINUOUSLY);
             clip.start();
         } catch(Exception e) {
             //TODO: handle exception
