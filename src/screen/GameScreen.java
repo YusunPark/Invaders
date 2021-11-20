@@ -8,6 +8,7 @@ import engine.Cooldown;
 import engine.Core;
 import engine.GameSettings;
 import engine.GameState;
+import engine.MusicManager;
 import entity.*;
 
 /**
@@ -77,6 +78,9 @@ public class GameScreen extends Screen {
 	private Cooldown escCooldown; 
 	/** Check if resume is printed on log */
     private Boolean resumeLogged; 
+	/** Music manager */
+	private MusicManager musicmanager = new MusicManager();
+
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 * 
@@ -175,8 +179,10 @@ public class GameScreen extends Screen {
 					this.ship.moveLeft();
 				}
 				if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
-					if (this.ship.shoot(this.bullets))
+					if (this.ship.shoot(this.bullets)) {
+						musicmanager.run_shoot();
 						this.bulletsShot++;
+					}
 				
 				if (inputManager.isKeyDown(KeyEvent.VK_ESCAPE)){
 					if (isPause == false)

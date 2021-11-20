@@ -8,6 +8,7 @@ import engine.Cooldown;
 import engine.Core;
 import engine.DrawManager;
 import engine.InputManager;
+import engine.MusicManager;
 
 /**
  * Implements a generic screen.
@@ -42,6 +43,8 @@ public class Screen {
 	protected boolean isRunning;
 	/** What kind of screen goes next. */
 	protected int returnCode;
+
+	private MusicManager musicmanager = new MusicManager();
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -101,6 +104,7 @@ public class Screen {
 
 
 	protected void update() {
+		runMusic();
 	}
 
 	/**
@@ -119,5 +123,12 @@ public class Screen {
 	 */
 	public final int getHeight() {
 		return this.height;
+	}
+
+	private void runMusic() {
+		if(musicmanager.mainCooldown.checkFinished()) { 
+			musicmanager.run_main();
+			musicmanager.mainCooldown.reset();
+		}
 	}
 }
