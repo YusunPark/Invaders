@@ -17,6 +17,9 @@ public class MusicManager {
     private final static File shoot = new File("res\\Shoot.wav"); // runtime 1000
     private final static File come_boss = new File("res\\Begin boss.wav"); // runtime 32000
     private final static File game_bgm = new File("res\\Game BGM.wav"); // runtime 168000
+    private final static File ship_exp = new File("res\\Ship Explosion.wav");
+    private final static File enemy_exp = new File("res\\Enemy Ship Explosion.wav");
+    private final static File get_item = new File("res\\Get Item.wav");
 
     private static final int MAIN_BGM_LENGTH = 264000;
     private static final int GAME_BGM_LENGTH = 167000;
@@ -43,6 +46,42 @@ public class MusicManager {
         }
     }
 
+    public static void run_item() {
+        try {
+            AudioInputStream stream = AudioSystem.getAudioInputStream(get_item);
+            Clip clip = AudioSystem.getClip();
+            clip.open(stream);
+            clip.start();
+        } catch(Exception e) {
+            //TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+
+    public static void run_exp() {
+        try {
+            AudioInputStream stream = AudioSystem.getAudioInputStream(enemy_exp);
+            Clip clip = AudioSystem.getClip();
+            clip.open(stream);
+            clip.start();
+        } catch(Exception e) {
+            //TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+
+    public static void run_enemy_exp() {
+        try {
+            AudioInputStream stream = AudioSystem.getAudioInputStream(ship_exp);
+            Clip clip = AudioSystem.getClip();
+            clip.open(stream);
+            clip.start();
+        } catch(Exception e) {
+            //TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+
     /** 
      * Method for running BGM for main lobby.
      * 
@@ -50,14 +89,16 @@ public class MusicManager {
     public static void run_main() {
         if(main_clip.isRunning()) {
             if(mainCooldown.checkFinished()) {
-                game_clip.start();
-                gameCooldown.reset();
+                main_clip.loop(-1);
+                main_clip.start();
+                mainCooldown.reset();
             }
         }
         else {
             if(game_clip.isRunning()) {
                 stop_game();
             }
+            main_clip.loop(-1);
             main_clip.start();
             mainCooldown.reset();
         }
@@ -70,6 +111,7 @@ public class MusicManager {
     public static void run_game() {
         if(game_clip.isRunning()) {
             if(gameCooldown.checkFinished()) {
+                game_clip.loop(-1);
                 game_clip.start();
                 gameCooldown.reset();
             }
@@ -78,6 +120,7 @@ public class MusicManager {
             if(main_clip.isRunning()) {
                 stop_main();
             }
+            game_clip.loop(-1);
             game_clip.start();
             gameCooldown.reset();
         }

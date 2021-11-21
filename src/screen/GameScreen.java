@@ -364,6 +364,7 @@ public class GameScreen extends Screen {
 						}
 						else {
 							this.ship.destroy();
+							MusicManager.run_exp();
 							this.lives--;
 							this.logger.info("Hit on player ship, " + this.lives
 									+ " lives remaining.");
@@ -375,6 +376,7 @@ public class GameScreen extends Screen {
 					if (!enemyShip.isDestroyed()
 							&& checkCollision(bullet, enemyShip)) {
 						this.score += enemyShip.getPointValue();
+						MusicManager.run_enemy_exp();
 						this.shipsDestroyed++;
 						this.enemyShipFormation.destroy(enemyShip);
 						recyclable.add(bullet);
@@ -383,6 +385,7 @@ public class GameScreen extends Screen {
 						&& !this.enemyShipSpecial.isDestroyed()
 						&& checkCollision(bullet, this.enemyShipSpecial)) {
 					this.score += this.enemyShipSpecial.getPointValue();
+					MusicManager.run_enemy_exp();
 					this.shipsDestroyed++;
 					this.enemyShipSpecial.destroy();
 					this.enemyShipSpecialExplosionCooldown.reset();
@@ -422,6 +425,7 @@ public class GameScreen extends Screen {
 		// 한 스테이지에서만 적용
 		int tmp = (int)(Math.random() * 5);
 		this.logger.info("get reward...");
+		MusicManager.run_item();
 		switch(tmp) {
 		case 1:
 			ship.increase_Numofbullets();
