@@ -5,12 +5,15 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+
+import javax.swing.ImageIcon;
 
 import screen.Screen;
 import entity.Entity;
@@ -155,9 +158,11 @@ public final class DrawManager {
 		graphics = frame.getGraphics();
 		backBufferGraphics = backBuffer.getGraphics();
 
-		backBufferGraphics.setColor(Color.BLACK);
 		backBufferGraphics
 				.fillRect(0, 0, screen.getWidth(), screen.getHeight());
+		
+		Image img = new ImageIcon("res\\moon.png").getImage();
+		backBufferGraphics.drawImage(img, 0, 0, null);
 
 		fontRegularMetrics = backBufferGraphics.getFontMetrics(fontRegular);
 		fontBigMetrics = backBufferGraphics.getFontMetrics(fontBig);
