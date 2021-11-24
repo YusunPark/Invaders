@@ -161,7 +161,7 @@ public final class DrawManager {
 		backBufferGraphics
 				.fillRect(0, 0, screen.getWidth(), screen.getHeight());
 		
-		Image img = new ImageIcon("res\\moon.png").getImage();
+		Image img = new ImageIcon("res/moon.png").getImage();
 		backBufferGraphics.drawImage(img, 0, 0, null);
 
 		fontRegularMetrics = backBufferGraphics.getFontMetrics(fontRegular);
