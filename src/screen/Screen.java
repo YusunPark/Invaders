@@ -99,10 +99,9 @@ public class Screen {
 		return 0;
 	}
 
-
 	protected void update() {
-	}
 
+	}
 	/**
 	 * Getter for screen width.
 	 * 
