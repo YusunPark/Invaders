@@ -73,7 +73,6 @@ public final class Core {
 	/** Logger handler for printing to console. */
 	private static ConsoleHandler consoleHandler;
 
-
 	/**
 	 * Test implementation.
 	 * 
@@ -155,7 +154,6 @@ public final class Core {
 						break;
 					}
 
-
 				} while (gameState.getLivesRemaining() > 0
 						&& gameState.getLevel() <= NUM_LEVELS);
 
@@ -209,7 +207,6 @@ public final class Core {
 			default:
 				break;
 			}
-
 		} while (returnCode != 0);
 
 		fileHandler.flush();

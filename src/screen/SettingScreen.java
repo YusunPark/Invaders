@@ -3,6 +3,7 @@ package screen;
 import java.awt.event.KeyEvent;
 
 import engine.Core;
+import engine.MusicManager;
 import engine.Cooldown;
 
 public class SettingScreen extends Screen {
@@ -47,7 +48,7 @@ public class SettingScreen extends Screen {
 	 */
     protected final void update() {
 		super.update();
-
+		MusicManager.run_main();
         draw();
 		if (this.selectionCooldown.checkFinished()
 				&& this.inputDelay.checkFinished()) {
@@ -66,7 +67,9 @@ public class SettingScreen extends Screen {
 		}
     }
 
-	// 1 5
+	/**
+	 * Shifts the focus to the next menu item.
+	 */
     private void nextMenuItem() {
 		if (this.returnCode == 6) {
 			this.returnCode = 1;
