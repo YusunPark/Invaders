@@ -8,12 +8,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import screen.GameScreen;
-import screen.HighScoreScreen;
-import screen.SettingScreen;
-import screen.ScoreScreen;
-import screen.Screen;
-import screen.TitleScreen;
+import screen.*;
 
 /**
  * Implements core game logic.
@@ -187,6 +182,14 @@ public final class Core {
 				LOGGER.info("Closing setting screen.");
 				break;
 			case 5:
+				// Help.
+				currentScreen = new HelpScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " help screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing help screen.");
+				break;
+			case 6:
 				// Mute or Audio Setting
 				// not yet
 				// currentScreen = new AudioScreen(width, height, FPS);
@@ -195,7 +198,7 @@ public final class Core {
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing Audio screen.");				
 				break;
-			case 6:
+			case 7:
 				// Video Setting? fps? something
 				// not yet
 				// currentScreen = new VideoScreen(width, height, FPS);
@@ -204,6 +207,7 @@ public final class Core {
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing Video screen.");
 				break;
+
 			default:
 				break;
 			}
