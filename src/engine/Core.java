@@ -182,23 +182,11 @@ public final class Core {
 				LOGGER.info("Closing setting screen.");
 				break;
 			case 5:
-				// Help.
-				currentScreen = new HelpScreen(width, height, FPS);
-				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-						+ " help screen at " + FPS + " fps.");
+				LOGGER.info("Mute / Unmute Audio");
+				MusicManager.toggleIsMute();
 				returnCode = frame.setScreen(currentScreen);
-				LOGGER.info("Closing help screen.");
 				break;
 			case 6:
-				// Mute or Audio Setting
-				// not yet
-				// currentScreen = new AudioScreen(width, height, FPS);
-				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-				+ " Audio screen at " + FPS + " fps.");
-				returnCode = frame.setScreen(currentScreen);
-				LOGGER.info("Closing Audio screen.");				
-				break;
-			case 7:
 				// Video Setting? fps? something
 				// not yet
 				// currentScreen = new VideoScreen(width, height, FPS);
@@ -206,6 +194,14 @@ public final class Core {
 				+ " Video screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing Video screen.");
+				break;
+      case 7:
+        // Help.
+				currentScreen = new HelpScreen(width, height, FPS);
+				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+						+ " help screen at " + FPS + " fps.");
+				returnCode = frame.setScreen(currentScreen);
+				LOGGER.info("Closing help screen.");
 				break;
 
 			default:
