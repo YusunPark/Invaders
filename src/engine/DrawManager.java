@@ -83,7 +83,9 @@ public final class DrawManager {
 		/** Reward bullet. */
 		RewardBullet,
 
-		BossShip
+		BossShip,
+
+		Ship2
 	};
 
 	/**
@@ -101,16 +103,9 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.ShipDestroyed, new boolean[13][8]);
 			spriteMap.put(SpriteType.Bullet, new boolean[3][5]);
 			spriteMap.put(SpriteType.EnemyBullet, new boolean[3][5]);
-			spriteMap.put(SpriteType.EnemyShipA1, new boolean[12][8]);
-			spriteMap.put(SpriteType.EnemyShipA2, new boolean[12][8]);
-			spriteMap.put(SpriteType.EnemyShipB1, new boolean[12][8]);
-			spriteMap.put(SpriteType.EnemyShipB2, new boolean[12][8]);
-			spriteMap.put(SpriteType.EnemyShipC1, new boolean[12][8]);
-			spriteMap.put(SpriteType.EnemyShipC2, new boolean[12][8]);
-			spriteMap.put(SpriteType.EnemyShipSpecial, new boolean[16][7]);
-			spriteMap.put(SpriteType.Explosion, new boolean[13][7]);
-			spriteMap.put(SpriteType.RewardBullet, new boolean[7][7]);
-			//spriteMap.put(SpriteType.BossShip, new boolean[36][24]);
+			spriteMap.put(SpriteType.BossShip, new boolean[36][24]);
+			spriteMap.put(SpriteType.Ship2, new boolean[13][8]);
+
 
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
@@ -320,6 +315,25 @@ public final class DrawManager {
 	}
 
 	/**
+	 * Draws game title.
+	 * 
+	 * @param screen
+	 *            Screen to draw on.
+	 */
+	public void drawTitle2(final Screen screen) {
+		String titleString = "Invaders";
+		String instructionsString =
+				"select with a+d / left,right arrows, confirm with space";
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 2);
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, titleString, screen.getHeight() / 3);
+	}
+
+	/**
 	 * Draws main menu.
 	 * 
 	 * @param screen
@@ -408,7 +422,7 @@ public final class DrawManager {
 		} else {
 			audioString = "Mute";
 		}
-		String videoString = "Video Setting";
+		String videoString = "Ship selecting";
 
 		if (option == 1)
 			backBufferGraphics.setColor(Color.GREEN);
@@ -430,6 +444,36 @@ public final class DrawManager {
 				/ 3 * 2 + fontRegularMetrics.getHeight() * 4);
 	}
 
+	/** 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	public void drawshipSelecting(final Screen screen, final int option) {
+		String selectshipString = "Select your ship";
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredRegularString(screen, selectshipString,
+				screen.getHeight() / 3 + 75);
+	}
+
+	/**
+	 * 
+	 * 
+	 * 
+	 */
+
+	public void drawShips(final Screen screen, int num) {
+		backBufferGraphics.setColor(Color.WHITE);
+		Image dummy1 = new ImageIcon("res/ship1.png").getImage();
+		Image dummy2 = new ImageIcon("res/ship2.png").getImage();
+		if(num == 1)
+			backBufferGraphics.drawImage(dummy1, screen.getWidth() / 2 - 52, screen.getHeight() - (screen.getHeight() / 4 + 50), null);
+		else if (num == 2)
+			backBufferGraphics.drawImage(dummy2, screen.getWidth() / 2 - 52, screen.getHeight() - (screen.getHeight() / 4 + 50), null);
+	}
+
+	
 	/**
 	 * Draws game results.
 	 * 

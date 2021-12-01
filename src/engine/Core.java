@@ -187,9 +187,8 @@ public final class Core {
 				returnCode = frame.setScreen(currentScreen);
 				break;
 			case 6:
-				// Video Setting? fps? something
-				// not yet
-				// currentScreen = new VideoScreen(width, height, FPS);
+				// Ship Selecting.
+				currentScreen = new ShipScreen(width, height, FPS);
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 				+ " Video screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);
