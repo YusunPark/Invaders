@@ -15,6 +15,7 @@ import java.io.*;
  */
 public class MusicManager {
 
+
     /** Bgm Types. */
     public static enum BgmType {
         MainBgm,
@@ -38,7 +39,7 @@ public class MusicManager {
     };
 
     private static final int MAIN_BGM_LENGTH = 264000;
-    private static final int GAME_BGM_LENGTH = 167000;
+    private static final int GAME_BGM_LENGTH = 102000;
 
     public static Cooldown mainCooldown = Core.getCooldown(MAIN_BGM_LENGTH);
     public static Cooldown gameCooldown = Core.getCooldown(GAME_BGM_LENGTH);
