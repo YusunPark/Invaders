@@ -38,7 +38,7 @@ public class MusicManager {
         return isMute;
     }
 
-    public static void toggleIsMute(){
+    public static void test_sonar(){
         isMute = !isMute;
     }
 
