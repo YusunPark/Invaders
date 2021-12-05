@@ -180,5 +180,5 @@ log*
 demo/
 .vscode/
 
-.idea/
-out/
+# .idea/
+# out/
